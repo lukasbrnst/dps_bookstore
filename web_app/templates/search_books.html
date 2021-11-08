@@ -1,39 +1,139 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Presentation {% endblock %} 
+{% block title %} Services {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
-        <!-- Hero -->
-        <section class="section section bg-primary pb-11 pb-lg-12 text-white overflow-hidden z-2">
-            <div class="row mb-4 justify-content-center">
-                {% with messages = get_flashed_messages(with_categories=True) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        {% if category == 'message' %}
-                        <p class="alert alert-success error-message">{{ message }}</p>
-                        {% else %}
-                        <p class="alert alert-warning error-message">{{ message }}</p>
-                        {% endif %}
+<div class="section section-lg pb-0">
+    <div class="container">
+        <!-- Title -->
+        <!-- End of Title -->
+    </div>
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col mb-4">
+                <h2 class="h5">Search Book</h2>
+            </div>
+        </div>
+
+        <form class="form" method="POST" action="{{ url_for('search_books') }}">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <label class="h6" for="inlineFormCustomSelectPref">Search Title</label>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <label class="h6" for="inlineFormCustomSelectPref">Search Author</label>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <label class="h6" for="inlineFormCustomSelectPref">Date Range Start</label>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <label class="h6" for="exampleInputDate1">Date Range End</label>
+                </div>
+            </div>
+            <div class="row mb-4 mb-lg-5">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="fas fa-book"></span></span>
+                            </div>
+                            <input name='search_title' class="form-control form-control-lg" id="booktitle1" placeholder="Search"
+                            type="text" aria-label="Date with icon left">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="fas fa-book"></span></span>
+                            </div>
+                            <input name='search_author' class="form-control form-control-lg" id="booktitle1" placeholder="Search"
+                            type="text" aria-label="Date with icon left">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                        
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                            </div>
+                                <input name='date_start' class="form-control datepicker" id="exampleInputDate1" placeholder="Select Date"
+                                    type="text" aria-label="Date with icon left">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-sm-6">
+                    <div class="form-group">
+                        
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                            </div>
+                                <input name='date_end' class="form-control datepicker" id="exampleInputDate1" placeholder="Select Date"
+                                    type="text" aria-label="Date with icon left">
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-1 col-sm-6">
                     
-                    {% endfor %}
-                {% endif %}
-            
-            {% endwith %}
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4 col-sm-6">
+                                <button type="submit" class="btn btn-tertiary mr-3 animate-up-2 " , name="submit_type" value="show">Search</button>
+                            </div>
+                        </div>
+                    
+                </div>
+                    
             </div>
-    
-            <div class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2">
-                <svg class="fill-white" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 43.4" style="enable-background:new 0 0 1920 43.4;" xml:space="preserve">
-                   <path d="M0,23.3c0,0,405.1-43.5,697.6,0c316.5,1.5,108.9-2.6,480.4-14.1c0,0,139-12.2,458.7,14.3 c0,0,67.8,19.2,283.3-22.7v35.1H0V23.3z"></path>
-                </svg>
-            </div>
-        </section>
+        </form>
 
-
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'message' %}
+                    <p class="alert alert-success error-message">{{ message }}</p>
+                    {% else %}
+                    <p class="alert alert-warning error-message">{{ message }}</p>
+                    {% endif %}
+                
+                {% endfor %}
+            {% endif %}
         
+        {% endwith %}
+        
+    </div>
+    {% if data_total %}
+    <div class="container">
+        <div class="row mb-4 mb-lg-5  justify-content-center">
+            <div class="col-lg-8 col-sm-6">
+                <h2 class="h5">Total sum for all selected days</h2>
+    
+                <blockquote class="blockquote text-center">
+    
+                    {{data_total|safe}}
+    
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+
 
 {% endblock content %}
 
