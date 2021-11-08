@@ -3,4 +3,4 @@ requests
 pandas
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==0.14.3
-
+mysql-connector-python
