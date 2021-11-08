@@ -5,7 +5,7 @@ import os
 from web_app.flaskdb import db
 
 import sys
-sys.path.append("..") 
+sys.path.append(__file__+"/..") 
 from backend.db_tables import Books
 
 
